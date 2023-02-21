@@ -1,18 +1,100 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Math Addition Task Generator</title>
+	<title>Addition Task Generator</title>
 </head>
 <body>
-	<h1>Math Addition Task Generator</h1>
-	<label for="level">Choose a level: </label>
-	<input type="range" id="level" name="level" min="2" max="6">
-	<br><br>
-	<button id="generate-btn">Generate Task</button>
-	<br><br>
+	<h1>Addition Task Generator</h1>
+	<p>Select the level:</p>
+	<input type="range" min="2" max="6" value="2" id="level">
+	<p id="levelValue"></p>
+	<button onclick="generateTask()">Generate Task</button>
 	<p id="task"></p>
 
-	<script src="script.js"></script>
+	<script>
+		function count_carry(a, b)
+		{
+			// Initialize the value
+			// of carry to 0
+			let carry = 0;
+	
+			// Counts the number of
+			// carry operations
+			let count = 0;
+	
+			// Initialize len_a and len_b
+			// with the sizes of strings
+			let len_a = a.length, len_b = b.length;
+	
+			while (len_a != 0 || len_b != 0)
+			{
+	
+				// Assigning the ascii value
+				// of the character
+				let x = 0, y = 0;
+				if (len_a > 0)
+				{
+					x = a[len_a - 1] - '0';
+					len_a--;
+				}
+				if (len_b > 0)
+				{
+					y = b[len_b - 1] - '0';
+					len_b--;
+				}
+	
+				// Add both numbers/digits
+				let sum = x + y + carry;
+	
+				// If sum > 0, increment count
+				// and set carry to 1
+				if (sum >= 10)
+				{
+					carry = 1;
+					count++;
+				}
+	
+				// Else, set carry to 0
+				else
+					carry = 0;
+			}
+	
+			return count;
+		}
+
+		function generateAdditionTask(level) {
+		    if (level < 2 || level > 6) {
+		        return "Invalid level. Please enter a level between 2 and 6.";
+		    }
+		    var max_carry_level = Math.ceil(level / 2.0 - 1);
+		    var carry_level = Math.floor(Math.random() * (max_carry_level + 1));
+		    level -= carry_level;
+		    while (true) {
+		        var num1 = Math.floor(Math.random() * (Math.pow(10, Math.ceil(level / 2.0)) - Math.pow(10, Math.ceil(level / 2.0) - 1)) + Math.pow(10, Math.ceil(level / 2.0) - 1));
+		        var num2 = Math.floor(Math.random() * (Math.pow(10, Math.floor(level / 2.0)) - Math.pow(10, Math.floor(level / 2.0) - 1)) + Math.pow(10, Math.floor(level / 2.0) - 1));
+		        var carry = countCarry(num1.toString(), num2.toString());
+		        if (carry === carry_level) {
+		            if (carry === 0) {
+		                return num1.toString() + " + " + num2.toString();
+		            } else {
+		                return num1.toString() + " + " + num2.toString() + " with carry";
+		            }
+		        }
+		    }
+		}
+
+		function generateTask() {
+			var level = document.getElementById("level").value;
+			var task = generateAdditionTask(level);
+			document.getElementById("task").innerHTML = task;
+		}
+
+		var slider = document.getElementById("level");
+		var output = document.getElementById("levelValue");
+		output.innerHTML = slider.value;
+		slider.oninput = function() {
+			output.innerHTML = this.value;
+		}
+	</script>
 </body>
 </html>
-
