@@ -174,12 +174,13 @@
 		    while (true) {
 		        var num1 = Math.floor(Math.random() * (Math.pow(10, Math.ceil(level / 2.0)) - Math.pow(10, Math.ceil(level / 2.0) - 1)) + Math.pow(10, Math.ceil(level / 2.0) - 1));
 		        var num2 = Math.floor(Math.random() * (Math.pow(10, Math.floor(level / 2.0)) - Math.pow(10, Math.floor(level / 2.0) - 1)) + Math.pow(10, Math.floor(level / 2.0) - 1));
+				var sum  = num1+num2;
 		        var carry = countCarry(num1.toString(), num2.toString());
 		        if (carry === carry_level) {
 		            if (carry === 0) {
-		                return num1.toString() + " + " + num2.toString();
+		                return num1.toString() + " + " + num2.toString()+" = "+sum.toString();
 		            } else {
-		                return num1.toString() + " + " + num2.toString() + " with carry level: " + carry.toString();
+		                return num1.toString() + " + " + num2.toString()+" = "+sum.toString() + " with carry level: " + carry.toString();
 		            }
 		        }
 		    }
