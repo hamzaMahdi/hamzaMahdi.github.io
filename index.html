@@ -100,7 +100,7 @@
 		<h1>WACT Generator</h1>
 		<p>Select the level:</p>
 		<div class="range-container">
-			<input type="range" min="2" max="6" value="2" id="level">
+			<input type="range" min="2" max="10" value="2" id="level">
 		</div>
 		<div class="range-container">
 			<p>Level: <span id="levelValue"></span></p>
@@ -165,9 +165,9 @@
 		}
 
 		function generateAdditionTask(level) {
-		    if (level < 2 || level > 6) {
-		        return "Invalid level. Please enter a level between 2 and 6.";
-		    }
+		    // if (level < 2 || level > 6) {
+		    //     return "Invalid level. Please enter a level between 2 and 6.";
+		    // }
 		    var max_carry_level = Math.ceil(level / 2.0 - 1);
 		    var carry_level = Math.floor(Math.random() * (max_carry_level + 1));
 		    level -= carry_level;
